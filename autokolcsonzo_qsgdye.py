@@ -5,6 +5,7 @@ import re
 import json
 import os
 
+
 # ==== Absztrakt osztályok ====
 class Auto(ABC):
     def __init__(self, rendszam, tipus, berleti_dij):
