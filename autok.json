@@ -1,0 +1,20 @@
+[
+    {
+        "rendszam": "CRY-952",
+        "nev": "Toyota Corolla",
+        "dij": 10000,
+        "tipus": "szemelyauto"
+    },
+    {
+        "rendszam": "KZA-662",
+        "nev": "Ford Transit",
+        "dij": 15000,
+        "tipus": "teherauto"
+    },
+    {
+        "rendszam": "WHS-646",
+        "nev": "Volkswagen Golf",
+        "dij": 12000,
+        "tipus": "szemelyauto"
+    }
+]

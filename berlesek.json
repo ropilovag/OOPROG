@@ -1,0 +1,77 @@
+[
+    {
+        "rendszam": "CRY-952",
+        "datum_tol": "2025-04-13",
+        "datum_ig": "2025-04-16"
+    },
+    {
+        "rendszam": "CRY-952",
+        "datum_tol": "2025-04-17",
+        "datum_ig": "2025-04-20"
+    },
+    {
+        "rendszam": "CRY-952",
+        "datum_tol": "2025-04-21",
+        "datum_ig": "2025-04-24"
+    },
+    {
+        "rendszam": "CRY-952",
+        "datum_tol": "2025-04-25",
+        "datum_ig": "2025-04-28"
+    },
+    {
+        "rendszam": "CRY-952",
+        "datum_tol": "2025-04-29",
+        "datum_ig": "2025-05-02"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-04-13",
+        "datum_ig": "2025-04-16"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-04-17",
+        "datum_ig": "2025-04-20"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-04-21",
+        "datum_ig": "2025-04-24"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-04-25",
+        "datum_ig": "2025-04-28"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-04-29",
+        "datum_ig": "2025-05-02"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-04-13",
+        "datum_ig": "2025-04-16"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-04-17",
+        "datum_ig": "2025-04-20"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-04-21",
+        "datum_ig": "2025-04-24"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-04-25",
+        "datum_ig": "2025-04-28"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-04-29",
+        "datum_ig": "2025-05-02"
+    }
+]
