@@ -80,6 +80,7 @@ class Autokolcsonzo:
             if all(not b.atfedi(datum_tol, datum_ig) or b.auto.rendszam != auto.rendszam for b in self.berlesek)
         ]
 
+
 # ==== Segédfüggvények ====
 def ellenoriz_rendszam(rsz):
     return re.match(r"^[A-Z]{3}-\d{3}$", rsz) is not None
