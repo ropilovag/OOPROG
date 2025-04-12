@@ -5,7 +5,6 @@ import re
 import json
 import os
 
-
 # ==== Absztrakt osztályok ====
 class Auto(ABC):
     def __init__(self, rendszam, tipus, berleti_dij):
@@ -27,13 +26,14 @@ class Teherauto(Auto):
 
 # ==== Bérlés osztály ====
 class Berles:
-    def __init__(self, auto, datum_tol, datum_ig):
+    def __init__(self, auto, datum_tol, datum_ig, felhasznalo):
         self.auto = auto
         self.datum_tol = datum_tol
         self.datum_ig = datum_ig
+        self.felhasznalo = felhasznalo
 
     def __str__(self):
-        return f"{self.auto.auto_info()} - {self.datum_tol} - {self.datum_ig} - Ár: {self.napok_szama() * self.auto.berleti_dij} Ft"
+        return f"{self.auto.auto_info()} - {self.datum_tol} - {self.datum_ig} - {self.felhasznalo} - Ár: {self.napok_szama() * self.auto.berleti_dij} Ft"
 
     def napok_szama(self):
         return (self.datum_ig - self.datum_tol).days + 1
@@ -48,7 +48,7 @@ class Autokolcsonzo:
         self.autok = []
         self.berlesek = []
 
-    def auto_berlese(self, rendszam, datum_tol, datum_ig):
+    def auto_berlese(self, rendszam, datum_tol, datum_ig, felhasznalo):
         if not ellenoriz_rendszam(rendszam):
             return "Érvénytelen rendszám formátum. (Pl: ABC-123)"
         if datum_tol > datum_ig:
@@ -59,14 +59,18 @@ class Autokolcsonzo:
                 for berles in self.berlesek:
                     if berles.auto.rendszam == rendszam and berles.atfedi(datum_tol, datum_ig):
                         return "Ez az autó már ki van bérelve ezen időszakban."
-                uj_berles = Berles(auto, datum_tol, datum_ig)
+                uj_berles = Berles(auto, datum_tol, datum_ig, felhasznalo)
                 self.berlesek.append(uj_berles)
                 return f"Sikeres bérlés. Ár: {uj_berles.napok_szama() * auto.berleti_dij} Ft"
         return "Nincs ilyen rendszámú autó a rendszerben."
 
-    def berles_lemondasa(self, rendszam, datum_tol, datum_ig):
+    def berles_lemondasa(self, rendszam, datum_tol, datum_ig, felhasznalo):
         for berles in self.berlesek:
-            if berles.auto.rendszam == rendszam and berles.datum_tol == datum_tol and berles.datum_ig == datum_ig:
+            if (berles.auto.rendszam == rendszam and
+                berles.datum_tol == datum_tol and
+                berles.datum_ig == datum_ig):
+                if berles.felhasznalo != felhasznalo:
+                    return "Csak az mondhatja le a bérlést, aki lefoglalta."
                 self.berlesek.remove(berles)
                 return "A bérlés sikeresen le lett mondva."
         return "Nincs ilyen bérlés a rendszerben."
@@ -80,13 +84,25 @@ class Autokolcsonzo:
             if all(not b.atfedi(datum_tol, datum_ig) or b.auto.rendszam != auto.rendszam for b in self.berlesek)
         ]
 
-
 # ==== Segédfüggvények ====
 def ellenoriz_rendszam(rsz):
     return re.match(r"^[A-Z]{3}-\d{3}$", rsz) is not None
 
 def veletlen_rendszam():
     return f"{''.join(random.choices('ABCDEFGHIJKLMNOPQRSTUVWXYZ', k=3))}-{random.randint(100,999)}"
+
+def ment_felhasznalo(nev):
+    fajlnev = "felhasznalok.json"
+    adatok = []
+
+    if os.path.exists(fajlnev):
+        with open(fajlnev, "r") as f:
+            adatok = json.load(f)
+
+    if nev not in adatok:
+        adatok.append(nev)
+        with open(fajlnev, "w") as f:
+            json.dump(adatok, f, indent=4)
 
 def betolt_adat():
     kolcsonzo = Autokolcsonzo("Villám Rent")
@@ -107,10 +123,11 @@ def betolt_adat():
                     for auto in kolcsonzo.autok:
                         if auto.rendszam == b["rendszam"]:
                             kolcsonzo.berlesek.append(
-                                Berles(auto, date.fromisoformat(b["datum_tol"]), date.fromisoformat(b["datum_ig"]))
+                                Berles(auto, date.fromisoformat(b["datum_tol"]), date.fromisoformat(b["datum_ig"]), b.get("felhasznalo", "Ismeretlen"))
                             )
     return kolcsonzo
 
+# ==== Főprogram ====
 def main():
     kolcsonzo = betolt_adat()
 
@@ -124,6 +141,9 @@ def main():
 
         if valasz == "1":
             try:
+                felhasznalo = input("Add meg a neved: ").strip()
+                ment_felhasznalo(felhasznalo)
+
                 datum_tol = date.fromisoformat(input("Bérlés kezdete (YYYY-MM-DD): "))
                 datum_ig = date.fromisoformat(input("Bérlés vége (YYYY-MM-DD): "))
 
@@ -143,7 +163,7 @@ def main():
                 valasztott_index = int(input("Válassz egy autót (sorszám): ")) - 1
                 if 0 <= valasztott_index < len(elerhetok):
                     auto = elerhetok[valasztott_index]
-                    print(kolcsonzo.auto_berlese(auto.rendszam, datum_tol, datum_ig))
+                    print(kolcsonzo.auto_berlese(auto.rendszam, datum_tol, datum_ig, felhasznalo))
                 else:
                     print("Érvénytelen sorszám.")
 
@@ -151,15 +171,31 @@ def main():
                 print("Hibás dátumformátum. Használj YYYY-MM-DD formátumot.")
 
         elif valasz == "2":
-            rendszam = input("Add meg a rendszámot (pl. ABC-123): ").strip().upper()
-            datum_tol_input = input("Bérlés kezdete (YYYY-MM-DD): ")
-            datum_ig_input = input("Bérlés vége (YYYY-MM-DD): ")
+            felhasznalo = input("Add meg a neved: ").strip()
+            foglalasok = [b for b in kolcsonzo.berlesek if b.felhasznalo == felhasznalo]
+
+            if not foglalasok:
+                print("Nincs egyetlen bérlés sem ezen a néven.")
+                continue
+
+            print("\n--- Saját foglalásaid ---")
+            for i, b in enumerate(foglalasok, 1):
+                print(f"{i}. {b}")
+
             try:
-                datum_tol = date.fromisoformat(datum_tol_input)
-                datum_ig = date.fromisoformat(datum_ig_input)
-                print(kolcsonzo.berles_lemondasa(rendszam, datum_tol, datum_ig))
+                valasztott = int(input("Add meg a lemondani kívánt foglalás sorszámát: "))
+                if 1 <= valasztott <= len(foglalasok):
+                    kivalasztott = foglalasok[valasztott - 1]
+                    print(kolcsonzo.berles_lemondasa(
+                        kivalasztott.auto.rendszam,
+                        kivalasztott.datum_tol,
+                        kivalasztott.datum_ig,
+                        felhasznalo
+                    ))
+                else:
+                    print("Érvénytelen sorszám.")
             except ValueError:
-                print("Hibás dátumformátum.")
+                print("Csak számot adhatsz meg.")
 
         elif valasz == "3":
             print("\n--- Aktuális bérlések ---")
@@ -170,7 +206,12 @@ def main():
             print("Kilépés... Adatok mentése folyamatban...")
             with open("berlesek.json", "w") as f:
                 json.dump([
-                    {"rendszam": b.auto.rendszam, "datum_tol": b.datum_tol.isoformat(), "datum_ig": b.datum_ig.isoformat()}
+                    {
+                        "rendszam": b.auto.rendszam,
+                        "datum_tol": b.datum_tol.isoformat(),
+                        "datum_ig": b.datum_ig.isoformat(),
+                        "felhasznalo": b.felhasznalo
+                    }
                     for b in kolcsonzo.berlesek
                 ], f, indent=4)
             break

@@ -2,76 +2,103 @@
     {
         "rendszam": "CRY-952",
         "datum_tol": "2025-04-13",
-        "datum_ig": "2025-04-16"
+        "datum_ig": "2025-04-16",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "CRY-952",
         "datum_tol": "2025-04-17",
-        "datum_ig": "2025-04-20"
+        "datum_ig": "2025-04-20",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "CRY-952",
         "datum_tol": "2025-04-21",
-        "datum_ig": "2025-04-24"
+        "datum_ig": "2025-04-24",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "CRY-952",
         "datum_tol": "2025-04-25",
-        "datum_ig": "2025-04-28"
+        "datum_ig": "2025-04-28",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "CRY-952",
         "datum_tol": "2025-04-29",
-        "datum_ig": "2025-05-02"
+        "datum_ig": "2025-05-02",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "KZA-662",
         "datum_tol": "2025-04-13",
-        "datum_ig": "2025-04-16"
+        "datum_ig": "2025-04-16",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "KZA-662",
         "datum_tol": "2025-04-17",
-        "datum_ig": "2025-04-20"
+        "datum_ig": "2025-04-20",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "KZA-662",
         "datum_tol": "2025-04-21",
-        "datum_ig": "2025-04-24"
+        "datum_ig": "2025-04-24",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "KZA-662",
         "datum_tol": "2025-04-25",
-        "datum_ig": "2025-04-28"
+        "datum_ig": "2025-04-28",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "KZA-662",
         "datum_tol": "2025-04-29",
-        "datum_ig": "2025-05-02"
+        "datum_ig": "2025-05-02",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "WHS-646",
         "datum_tol": "2025-04-13",
-        "datum_ig": "2025-04-16"
+        "datum_ig": "2025-04-16",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "WHS-646",
         "datum_tol": "2025-04-17",
-        "datum_ig": "2025-04-20"
+        "datum_ig": "2025-04-20",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "WHS-646",
         "datum_tol": "2025-04-21",
-        "datum_ig": "2025-04-24"
+        "datum_ig": "2025-04-24",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "WHS-646",
         "datum_tol": "2025-04-25",
-        "datum_ig": "2025-04-28"
+        "datum_ig": "2025-04-28",
+        "felhasznalo": "Ismeretlen"
     },
     {
         "rendszam": "WHS-646",
         "datum_tol": "2025-04-29",
-        "datum_ig": "2025-05-02"
+        "datum_ig": "2025-05-02",
+        "felhasznalo": "Ismeretlen"
+    },
+    {
+        "rendszam": "WHS-646",
+        "datum_tol": "2025-05-05",
+        "datum_ig": "2025-05-07",
+        "felhasznalo": "Ropilovag"
+    },
+    {
+        "rendszam": "KZA-662",
+        "datum_tol": "2025-05-05",
+        "datum_ig": "2025-05-09",
+        "felhasznalo": "Ropi"
     }
 ]
